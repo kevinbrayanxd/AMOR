@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Amor</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            cursor: pointer;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .te-amo {
+            position: absolute;
+            font-size: 20px;
+            font-weight: bold;
+            user-select: none;
+            animation: fall linear infinite;
+            text-shadow: 0 0 5px currentColor;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        .explosion {
+            position: absolute;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            animation: explode 0.8s ease-out forwards;
+            opacity: 0;
+            font-size: 0;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(-50%, -50%) scale(0.1);
+                opacity: 1;
+                font-size: 20px;
+            }
+            70% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 0;
+                font-size: 30px;
+            }
+        }
+
+        .heart {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            color: #ff4081;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            text-shadow: 0 0 20px #ff4081;
+        }
+
+        .show-heart {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container"></div>
+    <div class="heart" id="heart">❤️</div>
+
+    <script>
+        const container = document.getElementById('container');
+        const heart = document.getElementById('heart');
+        const colors = [
+            '#1E88E5', // Azul claro
+            '#0D47A1', // Azul oscuro
+            '#64B5F6', // Azul muy claro
+            '#1976D2', // Azul medio
+            '#42A5F5'  // Azul cielo
+        ];
+        const messages = ['Te amo', 'I love you', 'Je t\'aime', '愛してる', '사랑해'];
+        
+        // Crear columnas para la lluvia
+        const columnCount = 5;
+        const columns = [];
+        
+        for (let i = 0; i < columnCount; i++) {
+            const column = document.createElement('div');
+            column.style.position = 'absolute';
+            column.style.left = `${(i + 1) * (100 / (columnCount + 1))}%`;
+            column.style.width = '20px';
+            column.style.height = '100vh';
+            container.appendChild(column);
+            columns.push(column);
+            
+            // Iniciar la lluvia en cada columna
+            startRain(column, colors[i]);
+        }
+        
+        function startRain(column, color) {
+            // Crear "Te amo" que caen
+            setInterval(() => {
+                const teAmo = document.createElement('div');
+                teAmo.className = 'te-amo';
+                teAmo.textContent = messages[Math.floor(Math.random() * messages.length)];
+                teAmo.style.color = color;
+                teAmo.style.left = '0';
+                teAmo.style.top = '-30px';
+                teAmo.style.animationDuration = `${3 + Math.random() * 7}s`;
+                
+                // Posición horizontal aleatoria dentro de la columna
+                teAmo.style.transform = `translateX(${Math.random() * 20 - 10}px)`;
+                
+                // Evento de clic para la explosión
+                teAmo.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    createExplosion(e.clientX, e.clientY, color);
+                    teAmo.remove();
+                });
+                
+                column.appendChild(teAmo);
+                
+                // Eliminar después de que termine la animación
+                setTimeout(() => {
+                    if (teAmo.parentNode) {
+                        teAmo.remove();
+                    }
+                }, 10000);
+            }, 500);
+        }
+        
+        function createExplosion(x, y, color) {
+            const explosion = document.createElement('div');
+            explosion.className = 'explosion';
+            explosion.textContent = messages[Math.floor(Math.random() * messages.length)];
+            explosion.style.color = color;
+            explosion.style.left = `${x}px`;
+            explosion.style.top = `${y}px`;
+            container.appendChild(explosion);
+            
+            // Mostrar corazón brevemente
+            heart.style.color = color;
+            heart.classList.add('show-heart');
+            setTimeout(() => {
+                heart.classList.remove('show-heart');
+            }, 500);
+            
+            // Eliminar después de la animación
+            setTimeout(() => {
+                explosion.remove();
+            }, 1000);
+        }
+        
+        // Evento de clic en cualquier parte del contenedor
+        container.addEventListener('click', (e) => {
+            if (e.target === container) {
+                createExplosion(e.clientX, e.clientY, '#FFFFFF');
+            }
+        });
+    </script>
+</body>
+</html>
