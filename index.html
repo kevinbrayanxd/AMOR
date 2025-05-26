@@ -5,176 +5,489 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para mi Amor</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            background-color: #000;
-            overflow: hidden;
+            box-sizing: border-box;
             font-family: 'Arial', sans-serif;
-            cursor: pointer;
-            height: 100vh;
+        }
+        
+        body {
+            background-color: #ffebee;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .password-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
             display: flex;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .password-screen h1 {
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .password-input {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            width: 80%;
+            max-width: 300px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .password-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .password-btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        
+        .error-message {
+            color: #fff;
+            margin-top: 15px;
+            display: none;
+            background-color: rgba(255,0,0,0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        .container {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .letter {
+            background-color: #fff9c4;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #ffb74d;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .letter p {
+            margin-bottom: 10px;
+        }
+        
+        .open-btn {
+            background-color: #4fc3f7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .open-btn:hover {
+            background-color: #29b6f6;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+        }
+        
+        .question h3 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+        
+        .counter-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .counter {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 10px;
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .counter h3 {
+            color: #1976d2;
+            margin-bottom: 15px;
+        }
+        
+        .counter-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0d47a1;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+        }
+
+        /* Estilos para el control de música */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
             align-items: center;
         }
 
-        .container {
-            position: relative;
-            width: 100%;
-            height: 100%;
+        .music-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-right: 10px;
         }
 
-        .te-amo {
-            position: absolute;
-            font-size: 20px;
-            font-weight: bold;
-            user-select: none;
-            animation: fall linear infinite;
-            text-shadow: 0 0 5px currentColor;
+        .volume-control {
+            width: 100px;
         }
 
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
-
-        .explosion {
-            position: absolute;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            animation: explode 0.8s ease-out forwards;
-            opacity: 0;
-            font-size: 0;
-        }
-
-        @keyframes explode {
-            0% {
-                transform: translate(-50%, -50%) scale(0.1);
-                opacity: 1;
-                font-size: 20px;
-            }
-            70% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(3);
-                opacity: 0;
-                font-size: 30px;
-            }
-        }
-
-        .heart {
+        .music-notice {
+            display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 60px;
-            color: #ff4081;
-            opacity: 0;
-            transition: opacity 0.5s;
-            pointer-events: none;
-            text-shadow: 0 0 20px #ff4081;
+            bottom: 80px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            z-index: 1000;
+            max-width: 250px;
         }
+        
+        @media (max-width: 600px) {
+            .password-input {
+                width: 90%;
+            }
+            
+            section {
+                padding: 15px;
+            }
+            
+            .counter {
+                min-width: 100%;
+            }
 
-        .show-heart {
-            opacity: 1;
+            .music-control {
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .music-notice {
+                bottom: 70px;
+                right: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container" id="container"></div>
-    <div class="heart" id="heart">❤️</div>
+    <!-- Pantalla de contraseña -->
+    <div class="password-screen" id="passwordScreen">
+        <h1>Bienvenida a nuestro lugar especial</h1>
+        <p style="color: white; margin-bottom: 20px;">La contraseña es nuestro número secreto</p>
+        <input type="password" class="password-input" id="passwordInput" placeholder="Ingresa la contraseña">
+        <button class="password-btn" id="passwordBtn">Entrar</button>
+        <div class="error-message" id="errorMessage">Contraseña incorrecta. Intenta de nuevo.</div>
+    </div>
+    
+    <!-- Contenido principal -->
+    <div class="container" id="mainContent">
+        <section>
+            <h2>Feliz Aniversario</h2>
+            <button class="open-btn" id="openLetter">Presiona para abrir</button>
+            <div class="letter" id="loveLetter">
+                <p>Mi amor,</p>
+                <p>Hoy celebramos otro mes lleno de amor, risas y momentos inolvidables juntos. Cada día a tu lado es un regalo que atesoro profundamente.</p>
+                <p>Te escribo estas palabras desde lo más profundo de mi corazón:</p>
+                
+                <h3 style="text-align: center; margin: 20px 0; color: #e91e63;">Poema de Kevin Brayan</h3>
+                <p style="font-style: italic; text-align: center;">
+                    En el jardín de mi vida floreciste,<br>
+                    como la rosa más bella que existe.<br>
+                    Tu risa es melodía que me hechiza,<br>
+                    tu amor el faro que me guía.<br><br>
+                    
+                    Bajo la luna o bajo el sol,<br>
+                    contigo cada instante es mejor.<br>
+                    Tus ojos reflejan mi universo,<br>
+                    en ellos encuentro todo lo diverso.<br><br>
+                    
+                    Hoy te digo con voz sincera,<br>
+                    que eres mi sueño hecho realidad entera.<br>
+                    Feliz aniversario, amor de mi alma,<br>
+                    contigo la vida es dulce calma.
+                </p>
+                
+                <p style="margin-top: 20px;">Con todo mi amor,</p>
+                <p>Kevin Brayan</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>¿Por qué me enamoré de ti?</h2>
+            <div class="question">
+                <h3>¿Qué fue lo que me enamoró de ti?</h3>
+                <p>Porque eres una chica completamente diferente a todas las demás. Nadie se puede comparar a ti, eres única, especial, y exactamente lo que siempre quise en mi vida. Tu forma de ser, tu bondad, tu manera de ver el mundo... todo en ti es perfecto para mí.</p>
+            </div>
+            
+            <div class="question">
+                <h3>¿Por qué valió la pena luchar por nuestro amor?</h3>
+                <p>Porque el amor verdadero siempre vale la pena. Aunque tuvimos que pasar por varias dificultades, cada obstáculo solo hizo que nuestro vínculo se fortaleciera más. Los momentos difíciles demostraron que lo nuestro es real y que estamos dispuestos a luchar el uno por el otro.</p>
+            </div>
+            
+            <div class="question">
+                <h3>¿Qué significa para mí este aniversario?</h3>
+                <p>Este aniversario representa otro año de crecimiento juntos, de superar desafíos, de crear recuerdos inolvidables y de construir un amor que se hace más fuerte con cada día que pasa. Es la prueba de que cuando dos personas se aman de verdad, pueden superar cualquier cosa.</p>
+            </div>
+            
+            <div class="question">
+                <h3>¿Qué promesas te hago en este día especial?</h3>
+                <p>Te prometo seguir amándote cada día con la misma intensidad, apoyarte en todos tus sueños, ser tu refugio en los momentos difíciles y tu compañero de risas en los felices. Prometo construir un futuro a tu lado, lleno de amor, respeto y aventuras compartidas.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Nuestros Destinos Entrelazados</h2>
+            <p style="text-align: center; margin-bottom: 30px;">Desde el momento en que nacimos, el universo estaba conspirando para unirnos.</p>
+            
+            <div class="counter-container">
+                <div class="counter">
+                    <h3>Tú naciste el 9 de febrero de 2009</h3>
+                    <div class="counter-value" id="herLifeCounter"></div>
+                </div>
+                
+                <div class="counter">
+                    <h3>Yo nací el 15 de julio de 2008</h3>
+                    <div class="counter-value" id="myLifeCounter"></div>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 30px; font-style: italic;">
+                "El destino escribió nuestra historia antes de que nos conociéramos,<br>
+                y cada día que pasa es una página más de este hermoso cuento que escribimos juntos."
+            </p>
+        </section>
+        
+        <footer>
+            <p>Con todo mi amor, en nuestro aniversario - 26 de noviembre de 2024</p>
+            <p>© Kevin Brayan - Para el amor de mi vida</p>
+        </footer>
+    </div>
 
+    <!-- Control de música -->
+    <div class="music-control" id="musicControl" style="display: none;">
+        <button class="music-btn" id="toggleMusic">▶</button>
+        <input type="range" min="0" max="1" step="0.01" value="0.7" class="volume-control" id="volumeControl">
+    </div>
+
+    <div class="music-notice" id="musicNotice">
+        ¿Quieres escuchar nuestra canción especial? Haz clic en el botón de play abajo a la derecha.
+    </div>
+    
+    <!-- Audio (reemplaza con tu propio archivo MP3) -->
+    <audio id="bgMusic" loop>
+        <source src="tu-musica.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    
     <script>
-        const container = document.getElementById('container');
-        const heart = document.getElementById('heart');
-        const colors = [
-            '#1E88E5', // Azul claro
-            '#0D47A1', // Azul oscuro
-            '#64B5F6', // Azul muy claro
-            '#1976D2', // Azul medio
-            '#42A5F5'  // Azul cielo
-        ];
-        const messages = ['Te amo', 'I love you', 'Je t\'aime', '愛してる', '사랑해'];
+        // Contraseña
+        const passwordScreen = document.getElementById('passwordScreen');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordBtn = document.getElementById('passwordBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const mainContent = document.getElementById('mainContent');
         
-        // Crear columnas para la lluvia
-        const columnCount = 5;
-        const columns = [];
-        
-        for (let i = 0; i < columnCount; i++) {
-            const column = document.createElement('div');
-            column.style.position = 'absolute';
-            column.style.left = `${(i + 1) * (100 / (columnCount + 1))}%`;
-            column.style.width = '20px';
-            column.style.height = '100vh';
-            container.appendChild(column);
-            columns.push(column);
-            
-            // Iniciar la lluvia en cada columna
-            startRain(column, colors[i]);
+        passwordBtn.addEventListener('click', checkPassword);
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        function checkPassword() {
+            if (passwordInput.value === '261509') {
+                passwordScreen.style.display = 'none';
+                mainContent.style.display = 'block';
+                showMusicControls();
+            } else {
+                errorMessage.style.display = 'block';
+                passwordInput.value = '';
+            }
         }
         
-        function startRain(column, color) {
-            // Crear "Te amo" que caen
-            setInterval(() => {
-                const teAmo = document.createElement('div');
-                teAmo.className = 'te-amo';
-                teAmo.textContent = messages[Math.floor(Math.random() * messages.length)];
-                teAmo.style.color = color;
-                teAmo.style.left = '0';
-                teAmo.style.top = '-30px';
-                teAmo.style.animationDuration = `${3 + Math.random() * 7}s`;
-                
-                // Posición horizontal aleatoria dentro de la columna
-                teAmo.style.transform = `translateX(${Math.random() * 20 - 10}px)`;
-                
-                // Evento de clic para la explosión
-                teAmo.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    createExplosion(e.clientX, e.clientY, color);
-                    teAmo.remove();
-                });
-                
-                column.appendChild(teAmo);
-                
-                // Eliminar después de que termine la animación
-                setTimeout(() => {
-                    if (teAmo.parentNode) {
-                        teAmo.remove();
-                    }
-                }, 10000);
-            }, 500);
+        // Carta de amor
+        const openLetterBtn = document.getElementById('openLetter');
+        const loveLetter = document.getElementById('loveLetter');
+        
+        openLetterBtn.addEventListener('click', () => {
+            loveLetter.style.display = 'block';
+            openLetterBtn.style.display = 'none';
+        });
+        
+        // Contadores de tiempo
+        function updateCounters() {
+            // Fechas de nacimiento
+            const herBirthday = new Date(2009, 1, 9); // 9 de febrero 2009
+            const myBirthday = new Date(2008, 6, 15); // 15 de julio 2008
+            const now = new Date();
+            
+            // Calcular diferencia para ella
+            let herDiff = now - herBirthday;
+            let herDays = Math.floor(herDiff / (1000 * 60 * 60 * 24));
+            let herHours = Math.floor((herDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let herMinutes = Math.floor((herDiff % (1000 * 60 * 60)) / (1000 * 60));
+            let herSeconds = Math.floor((herDiff % (1000 * 60)) / 1000);
+            
+            // Calcular diferencia para mí
+            let myDiff = now - myBirthday;
+            let myDays = Math.floor(myDiff / (1000 * 60 * 60 * 24));
+            let myHours = Math.floor((myDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let myMinutes = Math.floor((myDiff % (1000 * 60 * 60)) / (1000 * 60));
+            let mySeconds = Math.floor((myDiff % (1000 * 60)) / 1000);
+            
+            // Mostrar resultados
+            document.getElementById('herLifeCounter').innerHTML = `
+                ${herDays} días<br>
+                ${herHours} horas<br>
+                ${herMinutes} minutos<br>
+                ${herSeconds} segundos<br>
+                de vida
+            `;
+            
+            document.getElementById('myLifeCounter').innerHTML = `
+                ${myDays} días<br>
+                ${myHours} horas<br>
+                ${myMinutes} minutos<br>
+                ${mySeconds} segundos<br>
+                de vida
+            `;
         }
         
-        function createExplosion(x, y, color) {
-            const explosion = document.createElement('div');
-            explosion.className = 'explosion';
-            explosion.textContent = messages[Math.floor(Math.random() * messages.length)];
-            explosion.style.color = color;
-            explosion.style.left = `${x}px`;
-            explosion.style.top = `${y}px`;
-            container.appendChild(explosion);
+        // Actualizar contadores cada segundo
+        updateCounters();
+        setInterval(updateCounters, 1000);
+        
+        // Control de música
+        const bgMusic = document.getElementById('bgMusic');
+        const musicControl = document.getElementById('musicControl');
+        const toggleMusic = document.getElementById('toggleMusic');
+        const volumeControl = document.getElementById('volumeControl');
+        const musicNotice = document.getElementById('musicNotice');
+
+        function showMusicControls() {
+            musicControl.style.display = 'flex';
+            musicNotice.style.display = 'block';
             
-            // Mostrar corazón brevemente
-            heart.style.color = color;
-            heart.classList.add('show-heart');
+            // Ocultar el aviso después de 5 segundos
             setTimeout(() => {
-                heart.classList.remove('show-heart');
-            }, 500);
-            
-            // Eliminar después de la animación
-            setTimeout(() => {
-                explosion.remove();
-            }, 1000);
+                musicNotice.style.display = 'none';
+            }, 5000);
         }
-        
-        // Evento de clic en cualquier parte del contenedor
-        container.addEventListener('click', (e) => {
-            if (e.target === container) {
-                createExplosion(e.clientX, e.clientY, '#FFFFFF');
+
+        // Configurar volumen inicial
+        bgMusic.volume = 0.7;
+
+        toggleMusic.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play()
+                    .then(() => {
+                        toggleMusic.textContent = '❚❚';
+                    })
+                    .catch(error => {
+                        alert("Por favor haz clic en cualquier parte de la página primero para activar el audio.");
+                        document.body.addEventListener('click', () => {
+                            bgMusic.play().then(() => {
+                                toggleMusic.textContent = '❚❚';
+                            });
+                        }, { once: true });
+                    });
+            } else {
+                bgMusic.pause();
+                toggleMusic.textContent = '▶';
             }
         });
+
+        volumeControl.addEventListener('input', () => {
+            bgMusic.volume = volumeControl.value;
+        });
+
+        // Forzar el landscape en móviles (opcional)
+        function checkOrientation() {
+            if (window.innerHeight > window.innerWidth) {
+                alert("Para una mejor experiencia, gira tu dispositivo a modo horizontal (landscape)");
+            }
+        }
+        
+        window.addEventListener('load', checkOrientation);
+        window.addEventListener('resize', checkOrientation);
     </script>
 </body>
 </html>
