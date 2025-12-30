@@ -3,491 +3,474 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para mi Amor</title>
+    <title>Para Juneia ❤️ - Kevin Brayan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Orbitron:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
         }
-        
+
         body {
-            background-color: #ffebee;
-            color: #333;
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            color: white;
+            transition: background 1.5s ease;
         }
-        
-        .password-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
+
+        .scene {
+            position: absolute;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            padding: 20px;
             text-align: center;
-        }
-        
-        .password-screen h1 {
-            color: #fff;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-        }
-        
-        .password-input {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 25px;
-            width: 80%;
-            max-width: 300px;
-            font-size: 16px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .password-btn {
-            background-color: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        
-        .password-btn:hover {
-            background-color: #ff5252;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
-        }
-        
-        .error-message {
-            color: #fff;
-            margin-top: 15px;
-            display: none;
-            background-color: rgba(255,0,0,0.3);
-            padding: 8px 15px;
-            border-radius: 20px;
-        }
-        
-        .container {
-            display: none;
-            max-width: 800px;
-            margin: 0 auto;
             padding: 20px;
-        }
-        
-        section {
-            background-color: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        section:hover {
-            transform: translateY(-5px);
-        }
-        
-        h2 {
-            color: #ff6b6b;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .letter {
-            background-color: #fff9c4;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #ffb74d;
-            margin-bottom: 20px;
-            display: none;
-        }
-        
-        .letter p {
-            margin-bottom: 10px;
-        }
-        
-        .open-btn {
-            background-color: #4fc3f7;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            display: block;
-            margin: 0 auto 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .open-btn:hover {
-            background-color: #29b6f6;
-        }
-        
-        .question {
-            margin-bottom: 20px;
-        }
-        
-        .question h3 {
-            color: #ff6b6b;
-            margin-bottom: 10px;
-        }
-        
-        .counter-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-        
-        .counter {
-            background-color: #e3f2fd;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            margin: 10px;
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .counter h3 {
-            color: #1976d2;
-            margin-bottom: 15px;
-        }
-        
-        .counter-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: #0d47a1;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #666;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.5s ease;
         }
 
-        /* Estilos para el control de música */
-        .music-control {
+        .scene.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* ESCENA 1 - NEGRO */
+        #scene1 {
+            background: #000;
+        }
+
+        .title-red {
+            font-family: 'Orbitron', sans-serif;
+            color: #ff0066;
+            font-size: 4rem;
+            text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .subtitle-white {
+            font-family: 'Pacifico', cursive;
+            color: white;
+            font-size: 2.5rem;
+            margin-top: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* ESCENA 2 - AZUL */
+        #scene2 {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+        }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: 25px;
+            max-width: 800px;
+            backdrop-filter: blur(10px);
+            border: 2px solid white;
+        }
+
+        .message-box h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #ff3366;
+            margin-bottom: 20px;
+        }
+
+        .message-box p {
+            font-size: 1.8rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .bear-emoji {
+            font-size: 5rem;
+            margin-top: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ESCENA 3 - AMARILLO */
+        #scene3 {
+            background: linear-gradient(135deg, #ffcc00, #ff9900);
+            color: #333;
+        }
+
+        .warning-box {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 700px;
+            border: 3px solid red;
+        }
+
+        .warning-box h2 {
+            color: #ff4444;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .warning-box p {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .hearts {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .heart {
+            width: 40px;
+            height: 40px;
+            background: #ff3366;
+            clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 75%, 20% 100%, 0% 35%);
+            animation: heartbeat 1.2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* ESCENA 4 - ROJO (PREGUNTAS) */
+        #scene4 {
+            background: #8b0000;
+        }
+
+        .quiz-container {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 40px;
+            border-radius: 25px;
+            max-width: 800px;
+            border: 5px solid white;
+            box-shadow: 0 0 40px #ff0000;
+        }
+
+        .quiz-title {
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px cyan;
+        }
+
+        .question {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #ffcc00;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            background: #222;
+            color: white;
+            border: 2px solid #666;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            background: #444;
+            border-color: #ffcc00;
+        }
+
+        .lives {
+            font-size: 1.8rem;
+            color: #ff6666;
+            margin-top: 20px;
+        }
+
+        /* ESCENA 5 - CARTA */
+        #scene5 {
+            background: linear-gradient(135deg, #660033, #33001a);
+            display: none;
+        }
+
+        .letter {
+            background: rgba(255, 255, 255, 0.95);
+            color: #330033;
+            width: 90%;
+            max-width: 800px;
+            padding: 50px;
+            border-radius: 40px;
+            border: 12px solid gold;
+            box-shadow: 0 0 60px #ff66b2;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            line-height: 1.8;
+            text-align: left;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        .letter h2 {
+            text-align: center;
+            color: #cc0066;
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 40px;
+            font-weight: bold;
+            color: #000;
+            font-size: 2rem;
+        }
+
+        .fin-message {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            color: #ff0066;
+            text-align: center;
+            font-family: 'Pacifico', cursive;
+        }
+
+        /* BOTÓN SIGUIENTE */
+        .next-btn {
+            margin-top: 40px;
+            padding: 15px 50px;
+            font-size: 1.8rem;
+            background: linear-gradient(to right, #ff3366, #ff9933);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            transition: transform 0.3s;
+        }
+
+        .next-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* AUDIO */
+        audio {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 50px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-        }
-
-        .music-btn {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-
-        .volume-control {
-            width: 100px;
-        }
-
-        .music-notice {
-            display: none;
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: #ff6b6b;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            z-index: 1000;
-            max-width: 250px;
-        }
-        
-        @media (max-width: 600px) {
-            .password-input {
-                width: 90%;
-            }
-            
-            section {
-                padding: 15px;
-            }
-            
-            .counter {
-                min-width: 100%;
-            }
-
-            .music-control {
-                bottom: 10px;
-                right: 10px;
-            }
-
-            .music-notice {
-                bottom: 70px;
-                right: 10px;
-            }
+            width: 250px;
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
-    <!-- Pantalla de contraseña -->
-    <div class="password-screen" id="passwordScreen">
-        <h1>Bienvenida a nuestro lugar especial</h1>
-        <p style="color: white; margin-bottom: 20px;">La contraseña es nuestro número secreto</p>
-        <input type="password" class="password-input" id="passwordInput" placeholder="Ingresa la contraseña">
-        <button class="password-btn" id="passwordBtn">Entrar</button>
-        <div class="error-message" id="errorMessage">Contraseña incorrecta. Intenta de nuevo.</div>
+
+    <!-- ESCENA 1: Pantalla negra con texto rojo y blanco -->
+    <div class="scene active" id="scene1">
+        <h1 class="title-red">Te amo Juneia ❤️</h1>
+        <p class="subtitle-white">Dedicado con animación de Kevin Brayan tu puma grrr</p>
+        <button class="next-btn" onclick="nextScene(2)">Siguiente</button>
     </div>
-    
-    <!-- Contenido principal -->
-    <div class="container" id="mainContent">
-        <section>
-            <h2>Feliz Aniversario</h2>
-            <button class="open-btn" id="openLetter">Presiona para abrir</button>
-            <div class="letter" id="loveLetter">
-                <p>Mi amor,</p>
-                <p>Hoy celebramos otro mes lleno de amor, risas y momentos inolvidables juntos. Cada día a tu lado es un regalo que atesoro profundamente.</p>
-                <p>Te escribo estas palabras desde lo más profundo de mi corazón:</p>
-                
-                <h3 style="text-align: center; margin: 20px 0; color: #e91e63;">Poema de Kevin Brayan</h3>
-                <p style="font-style: italic; text-align: center;">
-                    En el jardín de mi vida floreciste,<br>
-                    como la rosa más bella que existe.<br>
-                    Tu risa es melodía que me hechiza,<br>
-                    tu amor el faro que me guía.<br><br>
-                    
-                    Bajo la luna o bajo el sol,<br>
-                    contigo cada instante es mejor.<br>
-                    Tus ojos reflejan mi universo,<br>
-                    en ellos encuentro todo lo diverso.<br><br>
-                    
-                    Hoy te digo con voz sincera,<br>
-                    que eres mi sueño hecho realidad entera.<br>
-                    Feliz aniversario, amor de mi alma,<br>
-                    contigo la vida es dulce calma.
-                </p>
-                
-                <p style="margin-top: 20px;">Con todo mi amor,</p>
-                <p>Kevin Brayan</p>
+
+    <!-- ESCENA 2: Fondo azul, mensaje de amor -->
+    <div class="scene" id="scene2">
+        <div class="message-box">
+            <h2>Mira, esto es para ti Juneia</h2>
+            <p>Te amo con todo mi corazón ❤️<br>Gracias por este 1 año y 1 mes a tu lado.</p>
+            <div class="bear-emoji">🐻🎁</div>
+        </div>
+        <button class="next-btn" onclick="nextScene(3)">Siguiente</button>
+    </div>
+
+    <!-- ESCENA 3: Fondo amarillo, advertencia -->
+    <div class="scene" id="scene3">
+        <div class="warning-box">
+            <h2>⚠️ ADVERTENCIA ⚠️</h2>
+            <p>Al final de esta bonita animación hay una carta muy linda para ti,<br> pero para ello, tienes que responder estas preguntas correctamente.</p>
+            <p>Si no lo haces, no llegarás hasta el final.<br><strong>Solo tienes 5 vidas, úsalas con bien.</strong></p>
+            <div class="hearts" id="hearts">
+                <!-- Las vidas se generan con JS -->
             </div>
-        </section>
-        
-        <section>
-            <h2>¿Por qué me enamoré de ti?</h2>
-            <div class="question">
-                <h3>¿Qué fue lo que me enamoró de ti?</h3>
-                <p>Porque eres una chica completamente diferente a todas las demás. Nadie se puede comparar a ti, eres única, especial, y exactamente lo que siempre quise en mi vida. Tu forma de ser, tu bondad, tu manera de ver el mundo... todo en ti es perfecto para mí.</p>
+        </div>
+        <button class="next-btn" onclick="startQuiz()">Comenzar preguntas</button>
+    </div>
+
+    <!-- ESCENA 4: Preguntas -->
+    <div class="scene" id="scene4">
+        <div class="quiz-container">
+            <h2 class="quiz-title">Solo tres preguntas</h2>
+            <div id="question-container">
+                <!-- Preguntas cargadas por JS -->
             </div>
-            
-            <div class="question">
-                <h3>¿Por qué valió la pena luchar por nuestro amor?</h3>
-                <p>Porque el amor verdadero siempre vale la pena. Aunque tuvimos que pasar por varias dificultades, cada obstáculo solo hizo que nuestro vínculo se fortaleciera más. Los momentos difíciles demostraron que lo nuestro es real y que estamos dispuestos a luchar el uno por el otro.</p>
-            </div>
-            
-            <div class="question">
-                <h3>¿Qué significa para mí este aniversario?</h3>
-                <p>Este aniversario representa otro año de crecimiento juntos, de superar desafíos, de crear recuerdos inolvidables y de construir un amor que se hace más fuerte con cada día que pasa. Es la prueba de que cuando dos personas se aman de verdad, pueden superar cualquier cosa.</p>
-            </div>
-            
-            <div class="question">
-                <h3>¿Qué promesas te hago en este día especial?</h3>
-                <p>Te prometo seguir amándote cada día con la misma intensidad, apoyarte en todos tus sueños, ser tu refugio en los momentos difíciles y tu compañero de risas en los felices. Prometo construir un futuro a tu lado, lleno de amor, respeto y aventuras compartidas.</p>
-            </div>
-        </section>
-        
-        <section>
-            <h2>Nuestros Destinos Entrelazados</h2>
-            <p style="text-align: center; margin-bottom: 30px;">Desde el momento en que nacimos, el universo estaba conspirando para unirnos.</p>
-            
-            <div class="counter-container">
-                <div class="counter">
-                    <h3>Tú naciste el 9 de febrero de 2009</h3>
-                    <div class="counter-value" id="herLifeCounter"></div>
-                </div>
-                
-                <div class="counter">
-                    <h3>Yo nací el 15 de julio de 2008</h3>
-                    <div class="counter-value" id="myLifeCounter"></div>
-                </div>
-            </div>
-            
-            <p style="text-align: center; margin-top: 30px; font-style: italic;">
-                "El destino escribió nuestra historia antes de que nos conociéramos,<br>
-                y cada día que pasa es una página más de este hermoso cuento que escribimos juntos."
+            <div class="lives" id="lives-display">Vidas restantes: <span id="lives-count">5</span> ❤️</div>
+        </div>
+    </div>
+
+    <!-- ESCENA 5: Carta final -->
+    <div class="scene" id="scene5">
+        <div class="letter">
+            <h2>Para mi amor Juneia ❤️</h2>
+            <p>
+                Amor, agradezco que hayas llegado aquí. Te amo con todo mi corazón. Desde que estuvimos no fue nada fácil, todo lo que pasamos... ¿Te acuerdas cuando aún estábamos empezando la confianza y tuvimos nuestra primera salida? Fue bonito amor, me besabas, ay los dos enamorados.
+                <br><br>
+                Luego fue pasando el tiempo, fui a Trujillo mor, te extrañé mucho corazón. Pasamos de grado, mor, luego fuimos a 5to, tantas cosas que nunca se nos va a olvidar amor. Tuvimos que lidiar con problemas familiares, conociste mi casa, lo hicimos también mi vida. Te amo mi vida, gracias por compartir conmigo lindos momentos corazón.
+                <br><br>
+                Tantos recuerdos que se quedarán impregnados en nuestra mente mi vida. Una vez más estoy feliz de tenerte my love. ¡Nos vamos a casar shi! ❤️ Te amo, Kevin Brayan. (Si olvidé mencionar algunas cosas, te agradezco por todo mi bb).
             </p>
-        </section>
-        
-        <footer>
-            <p>Con todo mi amor, en nuestro aniversario - 26 de noviembre de 2024</p>
-            <p>© Kevin Brayan - Para el amor de mi vida</p>
-        </footer>
+            <div class="signature">Con todo mi amor,<br>Kevin Brayan ❤️</div>
+            <div class="fin-message">
+                Fin. Si llegaste hasta aquí, me escribes al WhatsApp diciendo "espumita no es gey jjs" 😊
+            </div>
+        </div>
+        <button class="next-btn" onclick="playMusic()">🎵 Reproducir música</button>
     </div>
 
-    <!-- Control de música -->
-    <div class="music-control" id="musicControl" style="display: none;">
-        <button class="music-btn" id="toggleMusic">▶</button>
-        <input type="range" min="0" max="1" step="0.01" value="0.7" class="volume-control" id="volumeControl">
-    </div>
-
-    <div class="music-notice" id="musicNotice">
-        ¿Quieres escuchar nuestra canción especial? Haz clic en el botón de play abajo a la derecha.
-    </div>
-    
-    <!-- Audio (reemplaza con tu propio archivo MP3) -->
-    <audio id="bgMusic" loop>
-        <source src="tu-musica.mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
+    <!-- Audio para la música de fondo -->
+    <audio id="bg-music" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio.
     </audio>
-    
+
     <script>
-        // Contraseña
-        const passwordScreen = document.getElementById('passwordScreen');
-        const passwordInput = document.getElementById('passwordInput');
-        const passwordBtn = document.getElementById('passwordBtn');
-        const errorMessage = document.getElementById('errorMessage');
-        const mainContent = document.getElementById('mainContent');
-        
-        passwordBtn.addEventListener('click', checkPassword);
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') checkPassword();
-        });
+        // Variables del juego
+        let currentScene = 1;
+        let lives = 5;
+        const correctAnswers = ['c', 'a', 'b'];
+        let currentQuestion = 0;
 
-        function checkPassword() {
-            if (passwordInput.value === '261509') {
-                passwordScreen.style.display = 'none';
-                mainContent.style.display = 'block';
-                showMusicControls();
-            } else {
-                errorMessage.style.display = 'block';
-                passwordInput.value = '';
+        const questions = [
+            {
+                text: "1. ¿Cuál era mi primer apodo de (animal)?",
+                options: ["a) León", "b) Delfín", "c) Canguro"]
+            },
+            {
+                text: "2. ¿Cuál es mi color favorito?",
+                options: ["a) Azul", "b) Rojo", "c) Verde"]
+            },
+            {
+                text: "3. ¿Qué quiero ser de grande?",
+                options: ["a) Médico", "b) Ing de sistemas", "c) Profesor"]
+            }
+        ];
+
+        // Cambiar de escena
+        function nextScene(sceneNumber) {
+            document.getElementById('scene' + currentScene).classList.remove('active');
+            currentScene = sceneNumber;
+            document.getElementById('scene' + currentScene).classList.add('active');
+
+            if (sceneNumber === 3) {
+                renderHearts();
             }
         }
-        
-        // Carta de amor
-        const openLetterBtn = document.getElementById('openLetter');
-        const loveLetter = document.getElementById('loveLetter');
-        
-        openLetterBtn.addEventListener('click', () => {
-            loveLetter.style.display = 'block';
-            openLetterBtn.style.display = 'none';
-        });
-        
-        // Contadores de tiempo
-        function updateCounters() {
-            // Fechas de nacimiento
-            const herBirthday = new Date(2009, 1, 9); // 9 de febrero 2009
-            const myBirthday = new Date(2008, 6, 15); // 15 de julio 2008
-            const now = new Date();
-            
-            // Calcular diferencia para ella
-            let herDiff = now - herBirthday;
-            let herDays = Math.floor(herDiff / (1000 * 60 * 60 * 24));
-            let herHours = Math.floor((herDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let herMinutes = Math.floor((herDiff % (1000 * 60 * 60)) / (1000 * 60));
-            let herSeconds = Math.floor((herDiff % (1000 * 60)) / 1000);
-            
-            // Calcular diferencia para mí
-            let myDiff = now - myBirthday;
-            let myDays = Math.floor(myDiff / (1000 * 60 * 60 * 24));
-            let myHours = Math.floor((myDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let myMinutes = Math.floor((myDiff % (1000 * 60 * 60)) / (1000 * 60));
-            let mySeconds = Math.floor((myDiff % (1000 * 60)) / 1000);
-            
-            // Mostrar resultados
-            document.getElementById('herLifeCounter').innerHTML = `
-                ${herDays} días<br>
-                ${herHours} horas<br>
-                ${herMinutes} minutos<br>
-                ${herSeconds} segundos<br>
-                de vida
+
+        // Renderizar corazones de vidas
+        function renderHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            heartsContainer.innerHTML = '';
+            for (let i = 0; i < lives; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Iniciar quiz
+        function startQuiz() {
+            nextScene(4);
+            showQuestion();
+        }
+
+        // Mostrar pregunta actual
+        function showQuestion() {
+            if (currentQuestion >= questions.length) {
+                showLetter();
+                return;
+            }
+
+            const container = document.getElementById('question-container');
+            const q = questions[currentQuestion];
+
+            container.innerHTML = `
+                <div class="question">${q.text}</div>
+                <div class="options">
+                    ${q.options.map((opt, idx) => `
+                        <div class="option" onclick="checkAnswer('${opt.charAt(0)}')">
+                            ${opt}
+                        </div>
+                    `).join('')}
+                </div>
             `;
-            
-            document.getElementById('myLifeCounter').innerHTML = `
-                ${myDays} días<br>
-                ${myHours} horas<br>
-                ${myMinutes} minutos<br>
-                ${mySeconds} segundos<br>
-                de vida
-            `;
-        }
-        
-        // Actualizar contadores cada segundo
-        updateCounters();
-        setInterval(updateCounters, 1000);
-        
-        // Control de música
-        const bgMusic = document.getElementById('bgMusic');
-        const musicControl = document.getElementById('musicControl');
-        const toggleMusic = document.getElementById('toggleMusic');
-        const volumeControl = document.getElementById('volumeControl');
-        const musicNotice = document.getElementById('musicNotice');
-
-        function showMusicControls() {
-            musicControl.style.display = 'flex';
-            musicNotice.style.display = 'block';
-            
-            // Ocultar el aviso después de 5 segundos
-            setTimeout(() => {
-                musicNotice.style.display = 'none';
-            }, 5000);
+            document.getElementById('lives-count').textContent = lives;
         }
 
-        // Configurar volumen inicial
-        bgMusic.volume = 0.7;
-
-        toggleMusic.addEventListener('click', () => {
-            if (bgMusic.paused) {
-                bgMusic.play()
-                    .then(() => {
-                        toggleMusic.textContent = '❚❚';
-                    })
-                    .catch(error => {
-                        alert("Por favor haz clic en cualquier parte de la página primero para activar el audio.");
-                        document.body.addEventListener('click', () => {
-                            bgMusic.play().then(() => {
-                                toggleMusic.textContent = '❚❚';
-                            });
-                        }, { once: true });
-                    });
+        // Verificar respuesta
+        function checkAnswer(answer) {
+            if (answer === correctAnswers[currentQuestion]) {
+                currentQuestion++;
+                if (currentQuestion >= questions.length) {
+                    showLetter();
+                } else {
+                    showQuestion();
+                }
             } else {
-                bgMusic.pause();
-                toggleMusic.textContent = '▶';
-            }
-        });
-
-        volumeControl.addEventListener('input', () => {
-            bgMusic.volume = volumeControl.value;
-        });
-
-        // Forzar el landscape en móviles (opcional)
-        function checkOrientation() {
-            if (window.innerHeight > window.innerWidth) {
-                alert("Para una mejor experiencia, gira tu dispositivo a modo horizontal (landscape)");
+                lives--;
+                document.getElementById('lives-count').textContent = lives;
+                renderHearts();
+                if (lives <= 0) {
+                    alert('❌ Te quedaste sin vidas. Recarga la página para intentar de nuevo.');
+                    document.getElementById('scene4').innerHTML = '<h1 style="color:white;">Game Over ❌</h1>';
+                } else {
+                    alert('Incorrecto. Pierdes una vida ❤️‍🩹');
+                }
             }
         }
-        
-        window.addEventListener('load', checkOrientation);
-        window.addEventListener('resize', checkOrientation);
+
+        // Mostrar carta
+        function showLetter() {
+            document.getElementById('scene4').style.display = 'none';
+            document.getElementById('scene5').style.display = 'flex';
+            document.getElementById('scene5').classList.add('active');
+        }
+
+        // Reproducir música
+        function playMusic() {
+            const music = document.getElementById('bg-music');
+            music.play();
+            alert('🎶 Música activada. ¡Disfruta la carta con música!');
+        }
+
+        // Inicializar corazones en escena 3
+        window.onload = function() {
+            if (document.getElementById('scene3').classList.contains('active')) {
+                renderHearts();
+            }
+        };
     </script>
 </body>
 </html>
